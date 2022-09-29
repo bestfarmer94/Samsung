@@ -65,7 +65,6 @@ public class Q13460 {
 		
 		for(int i=0; i<4; i++) {
 			while(true) {
-				
 				int nx = x + dx[i];
 				int nx_b = x_b + dx[i];
 			}
