@@ -48,6 +48,7 @@ public class Q13460 {
 		
 		dx = new int[] {-1, 0, 1, 0};
 		dy = new int[] {0, 1, 0, -1};
+		
 		result = -1;
 		
 		bfs(x, y, x_b, y_b, 0);
