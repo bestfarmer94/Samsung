@@ -48,9 +48,9 @@ public class Q13460 {
 		
 		dx = new int[] {-1, 0, 1, 0};
 		dy = new int[] {0, 1, 0, -1};
-		
+		//asdasd
 		result = -1;
-		
+		int ab = 0;
 		bfs(x, y, x_b, y_b, 0);
 		System.out.println(sb);
 		br.close();
