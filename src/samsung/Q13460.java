@@ -23,7 +23,7 @@ public class Q13460 {
 		Queue<Ball> q = new LinkedList<Ball>();
 		int x = 0; int y = 0;
 		int x2 = 0; int y2 = 0;
-		//
+		
 		for(int i=0; i<n; i++) {
 			String str = br.readLine();
 			
