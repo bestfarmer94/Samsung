@@ -20,7 +20,7 @@ public class Q19237 {
 		int[][] map = new int[n][n];
 		int[][] smell = new int[n][n];
 		int[][] shark = new int[m+1][4];	// [상어번호][x, y, 방향, 생존] 0은 비울거다.
-		//
+		
 		for(int i=0; i<n; i++) {
 			st = new StringTokenizer(br.readLine());
 			for(int j=0; j<n; j++) {
