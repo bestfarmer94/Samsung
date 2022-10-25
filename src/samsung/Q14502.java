@@ -15,7 +15,7 @@ public class Q14502 {
 	static Queue<int[]> q;
 	
 	public static void main(String[] args) throws IOException {
-		//
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		StringTokenizer st = new StringTokenizer(br.readLine());
