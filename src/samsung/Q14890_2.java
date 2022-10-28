@@ -81,7 +81,7 @@ public class Q14890_2 {		// 좀 더 깔끔한 버전, 앞 행이나 앞 열을 �
 					return false;
 				}
 			}
-			//
+			
 			if(confirm && count == l) {
 				count = 0;
 				confirm = false;
