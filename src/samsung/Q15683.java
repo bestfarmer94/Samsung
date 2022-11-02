@@ -64,10 +64,10 @@ public class Q15683 {
 	static void permutation(int depth, int[] dir) {
 		
 		if(depth == camera.size()) {
-			for(int i=0; i<dir.length; i++) {
-				System.out.print(dir[i] + " ");
-			}
-			System.out.println();
+//			for(int i=0; i<dir.length; i++) {
+//				System.out.print(dir[i] + " ");
+//			}
+//			System.out.println();
 			count_clone = count;
 			cctv(dir);
 			return;
@@ -85,6 +85,8 @@ public class Q15683 {
 				dir[depth] = i;
 				permutation(depth+1, dir);
 			}
+		}else {
+			permutation(depth+1, dir);
 		}
 	}
 	
@@ -114,12 +116,12 @@ public class Q15683 {
 			}
 		}
 		
-		for(int i=0; i<map.length; i++) {
-			for(int j=0; j<map[0].length; j++) {
-				System.out.print(clone[i][j] + " ");
-			}
-			System.out.println();
-		}
+//		for(int i=0; i<map.length; i++) {
+//			for(int j=0; j<map[0].length; j++) {
+//				System.out.print(clone[i][j] + " ");
+//			}
+//			System.out.println();
+//		}
 		min = Math.min(min, count_clone);
 	}
 	
