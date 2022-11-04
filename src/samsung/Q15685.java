@@ -13,7 +13,7 @@ public class Q15685 {
 	static int[] dx;
 	static int[] dy;
 	static ArrayList<Integer> dir;
-	//
+	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
