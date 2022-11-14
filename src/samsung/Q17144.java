@@ -59,7 +59,7 @@ public class Q17144 {
 		for(int i=0; i<r; i++) {
 			clone[i] = map[i].clone();
 		}
-		
+		//
 		for(int i=0; i<r; i++) {
 			for(int j=0; j<c; j++) {
 				if(map[i][j] >= 5) {
