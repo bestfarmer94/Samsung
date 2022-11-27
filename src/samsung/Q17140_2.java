@@ -9,7 +9,7 @@ public class Q17140_2 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		
-		
+		//
 		
 		System.out.println(sb);
 		
