@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class asd {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		String str = "Zbcdefg";
 		int[] cal = new int[str.length()];
