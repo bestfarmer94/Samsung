@@ -12,7 +12,7 @@ public class asd {
 		for(int i=0; i<str.length(); i++) {
 			cal[i] = str.charAt(i)  - 'A';	// 숫자 A면 0 이고 그거보다 크면 숫자로 변환
 		}
-		
+		//
 		Arrays.sort(cal);
 		
 		String answer = "";
