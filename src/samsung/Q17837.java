@@ -55,7 +55,7 @@ public class Q17837 {
 		br.close();
 	}
 
-	static int move(int time) {
+	static int move(int time) {	// 함수 쪼개기
 		
 		if(time > 1000) {
 			return -1;
