@@ -26,7 +26,7 @@ public class Q17837 {
 		map = new int[n+1][n+1];
 		horse = new int[k][3];
 		chess = new String[n+1][n+1];
-		//
+		
 		for(int i=1; i<n+1; i++) {
 			st = new StringTokenizer(br.readLine());
 			
