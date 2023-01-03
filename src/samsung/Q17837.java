@@ -6,32 +6,34 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Q17837 {
-
-	static int n, k;
-	static int[][] map;
-	static String[][] chess;
-	static int[][] horse;
-	static int[] dx, dy;
-	static int answer;
 	
+	static int n;
+	static int k;
+	static int[][] map;
+	static int[][] horse;
+	static String[][] map2;
+	static int dx[];
+	static int dy[];
+	
+	// 패배 했다. 테스트 케이스는 전부 성공했는데, 4%에서 진행이 안된다. 어느 경우에 실패하는지 결국 못찾았다.
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		StringTokenizer st = new StringTokenizer(br.readLine());
-
+		
 		n = Integer.parseInt(st.nextToken());
 		k = Integer.parseInt(st.nextToken());
-		
 		map = new int[n+1][n+1];
+		map2 = new String[n+1][n+1];
 		horse = new int[k][3];
-		chess = new String[n+1][n+1];
 		
 		for(int i=1; i<n+1; i++) {
 			st = new StringTokenizer(br.readLine());
 			
 			for(int j=1; j<n+1; j++) {
 				map[i][j] = Integer.parseInt(st.nextToken());
+				map2[i][j] = "";
 			}
 		}
 		
@@ -42,100 +44,106 @@ public class Q17837 {
 			horse[i][1] = Integer.parseInt(st.nextToken());
 			horse[i][2] = Integer.parseInt(st.nextToken());
 			
-			chess[horse[i][0]][horse[i][1]] = Integer.toString(i);
+			map2[horse[i][0]][horse[i][1]] = String.valueOf(i);
 		}
 		
+		int turn = 1;
 		dx = new int[] {0, 0, 0, -1, 1};
 		dy = new int[] {0, 1, -1, 0, 0};
 		
-		answer = move(1);
-		
-		sb.append(answer);
+		sb.append(start_turn(turn));
 		System.out.println(sb);
-		br.close();
 	}
-
-	static int move(int time) {	// 함수 쪼개기
-		
-		if(time > 1000) {
+	
+	static int start_turn(int turn) {
+//		System.out.println(turn);
+		if(turn > 1000) {
 			return -1;
 		}
 		
-		int max = 0;
-		
 		for(int i=0; i<horse.length; i++) {
-			if(max >= 4) {
+			if(move_horse(i)) {
+				return turn;
+			}
+		}
+		
+		return start_turn(turn+1);
+	}
+	
+	static boolean move_horse(int number) {
+//		System.out.println("number :" + number);
+//		for(int i=1; i<n+1; i++) {
+//			for(int j=1; j<n+1; j++) {
+//				if(map2[i][j].length() == 0) {
+//					System.out.print("0 ");
+//				}else {
+//					System.out.print(map2[i][j] + " ");
+//				}
+//			}
+//			System.out.println();
+//		}
+		
+		int x = horse[number][0];
+		int y = horse[number][1];
+		int direction = horse[number][2];
+//		System.out.println(x + " " + y);
+		String horses = map2[x][y];
+		int start = 0;
+		String word = "";
+		for(int i=0; i<horses.length(); i++) {
+			if(horses.charAt(i) - '0' == number) {
+				start = i;
 				break;
 			}
-			
-			int[] h = horse[i];
-			
-			int move_point = 0;
-			String curStr = chess[h[0]][h[1]];
-			
-			for(int j=0; j<curStr.length(); j++) {
-				if(curStr.charAt(j) == i - '0') {
-					move_point = j;
-					break;
-				}
-			}
-			
-			curStr = "";
-			String moveStr = "";
-			
-			for(int j=0; j<chess[h[0]][h[1]].length(); j++) {
-				if(j < move_point) {
-					curStr += chess[h[0]][h[1]].charAt(j);
-				}else {
-					moveStr += chess[h[0]][h[1]].charAt(j);
-				}
-			}
-			
-			chess[h[0]][h[1]] = curStr;
-			
-			int nx = h[0] + dx[h[2]];
-			int ny = h[1] + dy[h[2]];
-			
-			if(nx > 0 && ny > 0 && nx <= n && ny <= n) {
-				
-				if(map[nx][ny] == 0) {
-					chess[nx][ny] += moveStr;
-					
-				}else if(map[nx][ny] == 1) {
-					chess[nx][ny] += moveStr;
-					String nextStr = "";
-					
-					for(int k=chess[nx][ny].length()-1; k>=0; k--) {
-						nextStr += chess[nx][ny].charAt(k);
-					}
-					
-					chess[nx][ny] = nextStr;
-					
-				}else if(map[nx][ny] == 2) {
-					
-					nx -= 2 * dx[h[2]];
-					ny -= 2 * dy[h[2]];
-					
-					if(horse[i][2] <= 2) {
-						horse[i][2] = 3 - horse[i][2];
-					}else {
-						horse[i][2] = 7 - horse[i][2];
-					}
-					
-					if(map[nx][ny] == 2) {
-						// 이거 재귀가 되어야 하는데 함수를 쪼개야 할 것 같다.
-					}
-				}
-			}else {
-				
-			}
-			
+			word += horses.charAt(i);
 		}
 		
-		if(max >= 4) {
-			return time;
+		map2[x][y] = word;
+		word = horses.substring(start, horses.length());
+		
+		int nx = x + dx[direction];
+		int ny = y + dy[direction];
+		
+		if(nx > n || ny > n || map[nx][ny] == 2 || nx == 0 || ny == 0) {
+			nx = x - dx[direction];
+			ny = y - dy[direction];
+			change_direction(number, direction);
 		}
 		
-		return move(time+1);
+		if(nx > n || ny > n || map[nx][ny] == 2 || nx == 0 || ny == 0) {
+			return false;
+			
+		}else if(map[nx][ny] == 0) {
+			map2[nx][ny] += word;
+			for(int i=word.length()-1; i>=0; i--) {
+				horse[word.charAt(i)-'0'][0] = nx;
+				horse[word.charAt(i)-'0'][1] = ny;
+			}
+		}else{
+			String new_word = "";
+			for(int i=word.length()-1; i>=0; i--) {
+				new_word += word.charAt(i);
+				horse[word.charAt(i)-'0'][0] = nx;
+				horse[word.charAt(i)-'0'][1] = ny;
+			}
+			map2[nx][ny] += new_word;
+		}
+		
+		if(map2[nx][ny].length() >= 4) {
+			return true;
+		}
+		
+		return false;
 	}
-}
+	
+	static void change_direction(int number, int direction) {
+		
+		if(direction < 3) {
+			direction = 3 - direction;
+		}else {
+			direction = 7 - direction;
+		}
+		
+		horse[number][2] = direction;
+	}
+}	
